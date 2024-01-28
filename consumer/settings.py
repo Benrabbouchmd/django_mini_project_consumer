@@ -38,7 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "core.apps.CoreConfig"
+    "core.apps.CoreConfig",
+    'rest_framework',
+    'django_celery_results',
+    "rest_framework_api_key",
 ]
 
 MIDDLEWARE = [
@@ -135,3 +138,13 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 RIDDLE_API_KEY = config('RIDDLE_API_KEY')
+PRODUCER_BASE_URL = config('PRODUCER_BASE_URL')
+
+# CELERY STUFF
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_BROKER_URL = config('CELERY_BROKER_URL')
+CELERY_TASK_ALWAYS_EAGER = False
+CELERY_TASK_EAGER_PROPAGATES = False
